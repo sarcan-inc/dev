@@ -152,6 +152,79 @@ paths:
                   dateOfBirth: '1996-08-24'
         description: Post the necessary fields for the API to create a new user.
       description: Create a new user.
+  /my/pin:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-my-pin
+    post:
+      summary: ''
+      operationId: post-my-pin
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  nickname:
+                    type: string
+                  mail:
+                    type: string
+                  thumburl:
+                    type: string
+                  pin:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                        format: double
+                        description: 緯度
+                      longitude:
+                        type: number
+                        format: double
+                        description: 経度
+                      pintime:
+                        type: string
+                        format: date-time
+                        description: ピンを打った時間（ISO8601）
+                        readOnly: true
+                    required:
+                      - latitude
+                      - longitude
+                      - pintime
+              examples:
+                example-1:
+                  value:
+                    id: 0
+                    nickname: string
+                    mail: hoge@sample.com
+                    thumburl: hoge.jpg
+                    pin:
+                      latitude: 0
+                      longitude: 0
+                      pintime: 2021
+      description: 自分の位置を登録する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                latitue:
+                  type: integer
+                longitude:
+                  type: integer
+            examples:
+              example-1:
+                value:
+                  latitue: 0
+                  longitude: 0
 components:
   schemas:
     User:
